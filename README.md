@@ -16,6 +16,6 @@ Add following dependency to your app module build.gradle file:
 
 <pre>
 dependencies {
-    implementation "com.folioreader:folioreader:0.5.1
+    implementation 'com.github.KishanViramgama:Drawing:0.1.1'
 }
 </pre>
