@@ -23,3 +23,13 @@ dependencies {
 </pre>
 
 <b>Gradle</b>
+
+xml file
+
+<pre>
+<com.app.drawing.Util.CanvasView
+   android:id="@+id/canvas_drawing"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent" />
+</pre>
+
