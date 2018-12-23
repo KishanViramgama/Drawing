@@ -1,9 +1,4 @@
-
-<img src="https://github.com/KishanViramgama/Drawing/blob/master/app/src/main/res/drawable/app_icon.png" align="left" height="60px" style="max-width:100%;">
-
 # Drawing
-
-</br>
 
 <img src="https://github.com/KishanViramgama/Drawing/blob/master/app/src/main/res/drawable/app_demo.gif" height="368px" align="right" style="max-width:100%;">
 
