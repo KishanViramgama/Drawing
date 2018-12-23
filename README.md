@@ -24,7 +24,7 @@ dependencies {
 
 <b>xml file</b>
 
-<pre>&lt;<span class="pl-ent">activity</span>
+<pre>&lt;<span class="pl-ent">ImageView</span>
     <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>@+id/imageView<span class="pl-pds">"</span></span>
     <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_width</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
     <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_height</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
