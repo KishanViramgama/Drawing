@@ -21,3 +21,5 @@ dependencies {
     implementation 'com.github.KishanViramgama:Drawing:0.1.1'
 }
 </pre>
+
+<b>Gradle</b>
