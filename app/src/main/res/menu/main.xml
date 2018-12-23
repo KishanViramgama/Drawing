@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/ic_drawing"
+        android:icon="@drawable/ic_drawing"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/ic_eraser"
+        android:icon="@drawable/ic_eraser"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/ic_restart"
+        android:icon="@drawable/ic_restart"
+        android:title=""
+        app:showAsAction="always" />
+</menu>
