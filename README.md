@@ -22,14 +22,27 @@ dependencies {
 }
 </pre>
 
-<b>Gradle</b>
+<b>xml file</b>
 
-xml file
+<pre>&lt;<span class="pl-ent">activity</span>
+    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>@+id/imageView<span class="pl-pds">"</span></span>
+    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_width</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
+    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_height</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
+    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">contentDescription</span>=<span class="pl-s"><span class="pl-pds">"</span>@string/app_name<span class="pl-pds">"</span></span>
+    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>@mipmap/ic_app_icon<span class="pl-pds">"</span></span>&gt;
+</pre>
+
+<b>java file</b>
 
 <pre>
-<com.app.drawing.Util.CanvasView
-   android:id="@+id/canvas_drawing"
-   android:layout_width="match_parent"
-   android:layout_height="match_parent" />
+private CanvasView customCanvas = findViewById(R.id.canvas_drawing);
+ImageView imageView = findViewById(R.id.imageView);
+
+Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image);
+imageView.setImageBitmap(bitmap);
+
+customCanvas.paintColor(getResources().getColor(R.color.colorAccent));
+customCanvas.paintStork(20);
+customCanvas.clear();
 </pre>
 
