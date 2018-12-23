@@ -1,4 +1,4 @@
-package com.drawing.kids.Util;
+package com.app.drawing.Util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

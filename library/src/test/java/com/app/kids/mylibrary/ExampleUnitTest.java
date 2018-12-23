@@ -1,4 +1,4 @@
-package com.drawing.kids.mylibrary;
+package com.app.kids.mylibrary;
 
 import org.junit.Test;
 

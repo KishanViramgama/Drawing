@@ -1,4 +1,4 @@
-package com.drawing.kids.mylibrary;
+package com.app.kids.mylibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
