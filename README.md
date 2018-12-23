@@ -23,13 +23,25 @@ dependencies {
 </pre>
 
 <b>xml file</b>
-
-<pre>&lt;<span class="pl-ent">ImageView</span>
+<pre>&lt;<span class="pl-ent">RelativeLayout</span>
     <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>@+id/imageView<span class="pl-pds">"</span></span>
     <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_width</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
     <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_height</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
-    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">contentDescription</span>=<span class="pl-s"><span class="pl-pds">"</span>@string/app_name<span class="pl-pds">"</span></span>
-    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>@mipmap/ic_app_icon<span class="pl-pds">"</span></span>&gt;
+    <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">background</span>=<span class="pl-s"><span class="pl-pds">"</span>@string/app_name<span class="pl-pds">"</span></span>&gt;
+	
+	&lt;<span class="pl-ent">com.app.drawing.Util.CanvasView</span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>@+id/imageView<span class="pl-pds">"</span></span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_width</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_height</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"/</span></span>&gt;
+	
+	&lt;<span class="pl-ent">ImageView</span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>@+id/imageView<span class="pl-pds">"</span></span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_width</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">layout_height</span>=<span class="pl-s"><span class="pl-pds">"</span>match_parent<span class="pl-pds">"</span></span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">contentDescription</span>=<span class="pl-s"><span class="pl-pds">"</span>@string/app_name<span class="pl-pds">"</span></span>
+	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>@mipmap/ic_app_icon<span class="pl-pds">"/</span></span>&gt;
+
+&lt;<span class="pl-ent">RelativeLayout</span>&gt;
 </pre>
 
 <b>java file</b>
