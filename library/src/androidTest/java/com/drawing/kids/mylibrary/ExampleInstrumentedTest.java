@@ -1,4 +1,4 @@
-package com.kids.drawing;
+package com.drawing.kids.mylibrary;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.kids.drawing", appContext.getPackageName());
+        assertEquals("com.krishan.mylibrary.test", appContext.getPackageName());
     }
 }
