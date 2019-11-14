@@ -18,7 +18,7 @@ Add following dependency to your app module build.gradle file:
 
 <pre>
 dependencies {
-    implementation 'com.github.KishanViramgama:Drawing:0.1.3'
+    implementation 'com.github.KishanViramgama:Drawing:0.1.4'
 }
 </pre>
 
@@ -41,7 +41,7 @@ dependencies {
 	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">contentDescription</span>=<span class="pl-s"><span class="pl-pds">"</span>@string/app_name<span class="pl-pds">"</span></span>
 	  <span class="pl-e">android</span><span class="pl-e">:</span><span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>@mipmap/ic_app_icon<span class="pl-pds">"/</span></span>&gt;
 
-&lt;<span class="pl-ent">RelativeLayout</span>&gt;
+&lt;<span class="pl-ent">/RelativeLayout</span>&gt;
 </pre>
 
 <b>java file</b>
@@ -53,8 +53,19 @@ ImageView imageView = findViewById(R.id.imageView);
 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.image);
 imageView.setImageBitmap(bitmap);
 
+</pre>
+
+<b>Usage</b>
+
+<pre>
 customCanvas.paintColor(getResources().getColor(R.color.colorAccent));
 customCanvas.paintStork(20);
 customCanvas.clear();
 </pre>
+
+<pre>
+app:paintColor="@color/colorPrimary"
+app:paintStork="10"
+</pre>
+
 
