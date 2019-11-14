@@ -24,6 +24,8 @@
 
         <com.app.drawing.Util.CanvasView
             android:id="@+id/canvas_drawing"
+            app:paintColor="@color/colorPrimary"
+            app:paintStork="10"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
