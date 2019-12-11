@@ -2,6 +2,7 @@ package com.app.drawing.Util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +12,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.app.kids.mylibrary.R;
+
 public class CanvasView extends View {
+
     private Bitmap bitmap;
     private Canvas canvas;
     private Path path;
@@ -20,6 +24,11 @@ public class CanvasView extends View {
 
     public CanvasView(Context context, AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.CanvasView,
+                0, 0);
 
         path = new Path();
         bitmapPaint = new Paint(Paint.DITHER_FLAG);
@@ -32,6 +41,9 @@ public class CanvasView extends View {
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStrokeWidth(9);
+
+        paint.setColor(a.getColor(R.styleable.CanvasView_paintColor, 0));
+        paint.setStrokeWidth(a.getColor(R.styleable.CanvasView_paintStork, 0));
 
     }
 
@@ -125,6 +137,7 @@ public class CanvasView extends View {
         paint.setColor(color);
     }
 
+    //stork size
     public void paintStork(int width) {
         paint.setStrokeWidth(width);
     }
