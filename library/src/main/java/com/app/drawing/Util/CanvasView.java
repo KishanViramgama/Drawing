@@ -122,11 +122,10 @@ public class CanvasView extends View {
     }
 
     //Clear screen
-    public void clear() {
-        bitmap.eraseColor(Color.WHITE);
+    public void clear(int color) {
+        bitmap.eraseColor(color);
         invalidate();
         System.gc();
-
     }
 
     /**

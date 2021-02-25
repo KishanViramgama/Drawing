@@ -3,5 +3,21 @@
     <color name="colorPrimary">#D81B60</color>
     <color name="colorPrimaryDark">#D81B60</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="toolbar">#D81B60</color>
+    <color name="slider_bg">#D81B60</color>
+    <color name="drawer_item">#626262</color>
+    <color name="drawer_item_selected">#D81B60</color>
+    <color name="app_background">#EDEDF7</color>
+
+    <color name="splash_screen_bg">#D81B60</color>
+    <color name="canvasBg_drawing">#FFFFFF</color>
+
     <color name="white">#FFFFFF</color>
+
+    <color name="textView_noData">#6F6F6F</color>
+    <color name="dialog_text">#000000</color>
+    <color name="dialog_text_button">#D81B60</color>
+    <color name="button_bg">#D81B60</color>
+    <color name="textView_app_color">#D81B60</color>
+
 </resources>

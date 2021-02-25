@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Drawing</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="home">Home</string>
+    <string name="drawing">Drawing</string>
+    <string name="my_work">My Work</string>
+
+    <string name="isRTL">false</string>
+
+    <string name="saveDataPath">/Drawing/</string>
+
+    <string name="share_to">Share to</string>
+    <string name="share">Share</string>
+    <string name="save">Save</string>
+    <string name="loading">Loading....</string>
+    <string name="delete">Delete</string>
+    <string name="ok">OK</string>
+    <string name="select">Select</string>
+    <string name="chose_color">Chose Color</string>
+    <string name="Please_click_BACK_again_to_exit">Please click back again to exit</string>
+    <string name="cannot_use_save_share">Cannot use save feature please allow permission storage</string>
+
+    <string name="noData">No data found</string>
+    <string name="wrong">Something went to wrong please try again later</string>
+
 </resources>

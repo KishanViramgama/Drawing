@@ -1,41 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.app.kids.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    android:background="@color/app_background"
+    tools:context="activity.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:textStyle="bold"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_main"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout_main"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_main" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        android:background="@color/white">
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:itemIconTint="@drawable/drawer_select_image"
+        app:itemTextColor="@drawable/drawer_select_text"
+        app:headerLayout="@layout/nav_header_main"
+        app:menu="@menu/activity_main_drawer" />
 
-        <com.app.drawing.Util.CanvasView
-            android:id="@+id/canvas_drawing"
-            app:paintColor="@color/colorPrimary"
-            app:paintStork="10"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/app_name"
-            android:src="@mipmap/ic_app_icon" />
-
-    </RelativeLayout>
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
