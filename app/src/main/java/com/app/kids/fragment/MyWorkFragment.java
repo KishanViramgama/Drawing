@@ -50,7 +50,7 @@ public class MyWorkFragment extends Fragment {
 
         Constant.fileList = new ArrayList<>();
 
-        String root = Environment.getExternalStorageDirectory() + getResources().getString(R.string.saveDataPath);
+        String root = getActivity().getExternalFilesDir(getResources().getString(R.string.saveDataPath)).toString();
         file = new File(root);
 
         OnClick onClick = (OnClick) (position, type) ->

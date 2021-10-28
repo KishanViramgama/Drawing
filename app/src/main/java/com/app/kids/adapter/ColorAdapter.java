@@ -48,8 +48,8 @@ public class ColorAdapter extends RecyclerView.Adapter<ColorAdapter.ViewHolder> 
         }
 
         holder.view.setOnClickListener(v -> {
-            Constant.color_chose = colorLists.get(position).getColor();
-            customCanvas.paintColor(Constant.color_chose);
+            Constant.colorChose = colorLists.get(position).getColor();
+            customCanvas.paintColor(Constant.colorChose);
         });
 
     }

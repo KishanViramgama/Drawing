@@ -21,7 +21,7 @@ import com.google.android.material.textview.MaterialTextView;
 
 public class HomeFragment extends Fragment {
 
-    public int[] image;
+    private int[] image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class HomeFragment extends Fragment {
             MainActivity.toolbar.setTitle(getResources().getString(R.string.home));
         }
 
-        OnClick onClick = (OnClick) (position, type) -> {
+        OnClick onClick = (position, type) -> {
             Constant.image = image;
             startActivity(new Intent(getActivity(), Drawing.class)
                     .putExtra("position", position));

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Constant {
 
-    public static int color_chose = -56299;
+    public static int colorChose = -56299;
 
     public static int[] image = new int[]{};
 

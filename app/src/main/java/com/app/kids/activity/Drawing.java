@@ -1,6 +1,5 @@
 package com.app.kids.activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -10,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -36,12 +34,6 @@ import com.app.kids.util.Events;
 import com.app.kids.util.GlobalBus;
 import com.app.kids.util.Method;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -54,18 +46,16 @@ import java.util.Random;
 public class Drawing extends AppCompatActivity {
 
     private Method method;
-    private int position;
     private Dialog dialog;
     private DatabaseHandler db;
-    private MaterialToolbar toolbar;
     private SeekBar seekBar;
+    private boolean isShare = false;
     private CanvasView canvasView;
     private RecyclerView recyclerView;
     private ColorAdapter colorAdapter;
     private List<ColorList> colorLists;
     private ProgressDialog progressDialog;
     private ConstraintLayout constraintLayout;
-    private boolean isShare = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +72,7 @@ public class Drawing extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(Drawing.this);
 
-        toolbar = findViewById(R.id.toolbar_drawing);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_drawing);
         toolbar.setTitle(getResources().getString(R.string.drawing));
         setSupportActionBar(toolbar);
 
@@ -101,13 +91,13 @@ public class Drawing extends AppCompatActivity {
 
         canvasView = findViewById(R.id.canvas_drawing);
         canvasView.paintStork(20);
-        canvasView.paintColor(Constant.color_chose);
-        if (db.isColorCode(Constant.color_chose)) {
-            db.addColor(Constant.color_chose);
+        canvasView.paintColor(Constant.colorChose);
+        if (db.isColorCode(Constant.colorChose)) {
+            db.addColor(Constant.colorChose);
         }
         colorLists = db.getColorDetail();
 
-        position = getIntent().getIntExtra("position", 0);
+        int position = getIntent().getIntExtra("position", 0);
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), Constant.image[position]);
 
@@ -180,28 +170,7 @@ public class Drawing extends AppCompatActivity {
                 break;
 
             case R.id.screen_short:
-                Dexter.withContext(this)
-                        .withPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        .withListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                new SaveShare().execute();
-                            }
-
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                method.alertBox(getResources().getString(R.string.cannot_use_save_share));
-                                if (response.isPermanentlyDenied()) {
-                                    // navigate user to app settings
-                                }
-                            }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
-                            }
-                        }).check();
+                new SaveShare().execute();
                 break;
 
             case android.R.id.home:
@@ -238,13 +207,13 @@ public class Drawing extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-            String mPath;
+            String path;
             if (isShare) {
-                mPath = getExternalCacheDir().getAbsolutePath();
+                path = getExternalCacheDir().getAbsolutePath();
             } else {
-                mPath = Environment.getExternalStorageDirectory() + getResources().getString(R.string.saveDataPath);
+                path = getExternalFilesDir(getResources().getString(R.string.saveDataPath)).toString();
             }
-            File imageFile = new File(mPath);
+            File imageFile = new File(path);
 
             if (!imageFile.exists()) {
                 imageFile.mkdirs();
@@ -285,7 +254,7 @@ public class Drawing extends AppCompatActivity {
     @Override
     protected void onResume() {
         if (canvasView != null) {
-            canvasView.paintColor(Constant.color_chose);
+            canvasView.paintColor(Constant.colorChose);
         }
         super.onResume();
     }

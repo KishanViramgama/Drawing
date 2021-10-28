@@ -10,7 +10,7 @@
 
     <string name="isRTL">false</string>
 
-    <string name="saveDataPath">/Drawing/</string>
+    <string name="saveDataPath">Drawing</string>
 
     <string name="share_to">Share to</string>
     <string name="share">Share</string>
@@ -21,7 +21,6 @@
     <string name="select">Select</string>
     <string name="chose_color">Chose Color</string>
     <string name="Please_click_BACK_again_to_exit">Please click back again to exit</string>
-    <string name="cannot_use_save_share">Cannot use save feature please allow permission storage</string>
 
     <string name="noData">No data found</string>
     <string name="wrong">Something went to wrong please try again later</string>

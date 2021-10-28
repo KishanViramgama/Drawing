@@ -22,9 +22,9 @@ import top.defaults.colorpicker.ColorPickerView;
 
 public class ColorChose extends AppCompatActivity implements ColorObservable {
 
-    public MaterialToolbar toolbar;
     private View view;
     private DatabaseHandler db;
+    private MaterialToolbar toolbar;
     private ColorPickerView colorPickerView;
 
     @Override
@@ -55,13 +55,12 @@ public class ColorChose extends AppCompatActivity implements ColorObservable {
         });
 
         button.setOnClickListener(v -> {
-            Constant.color_chose = colorPickerView.getColor();
-            if (db.isColorCode(Constant.color_chose)) {
+            Constant.colorChose = colorPickerView.getColor();
+            if (db.isColorCode(Constant.colorChose)) {
                 db.addColor(colorPickerView.getColor());
             }
-            Events.ColorNotify colorNotify = new Events.ColorNotify(Constant.color_chose);
+            Events.ColorNotify colorNotify = new Events.ColorNotify(Constant.colorChose);
             GlobalBus.getBus().post(colorNotify);
-            Log.d("color", String.valueOf(colorPickerView.getColor()));
             onBackPressed();
         });
     }

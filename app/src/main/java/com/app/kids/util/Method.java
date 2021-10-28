@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
 
 import com.app.kids.R;
 import com.app.kids.interfaces.OnClick;
@@ -46,17 +47,14 @@ public class Method {
     }
 
     public void changeStatusBarColor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = activity.getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
+        Window window = activity.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(Color.TRANSPARENT);
     }
 
     public int getScreenWidth() {
         int columnWidth;
-        WindowManager wm = (WindowManager) activity
-                .getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) activity.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
 
         final Point point = new Point();
@@ -71,11 +69,12 @@ public class Method {
     public void share(String link) {
 
         try {
+            Uri contentUri = FileProvider.getUriForFile(activity, "com.app.kids.fileprovider", new File(link));
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.setType("image/*");
             shareIntent.putExtra(Intent.EXTRA_TEXT, activity.getResources().getString(R.string.app_name));
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(link)));
+            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
             activity.startActivity(Intent.createChooser(shareIntent, activity.getResources().getString(R.string.share_to)));
         } catch (Exception e) {
             Log.d("error", e.toString());
@@ -89,18 +88,22 @@ public class Method {
 
     public void alertBox(String message) {
 
-        if (activity != null) {
-            if (!activity.isFinishing()) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity, R.style.DialogTitleTextStyle);
-                alertDialogBuilder.setMessage(message);
-                alertDialogBuilder.setPositiveButton(activity.getResources().getString(R.string.ok),
-                        (arg0, arg1) -> {
+        try {
+            if (activity != null) {
+                if (!activity.isFinishing()) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity, R.style.DialogTitleTextStyle);
+                    alertDialogBuilder.setMessage(message);
+                    alertDialogBuilder.setPositiveButton(activity.getResources().getString(R.string.ok),
+                            (arg0, arg1) -> {
 
-                        });
+                            });
 
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
