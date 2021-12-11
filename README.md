@@ -18,7 +18,7 @@ Add following dependency to your app module build.gradle file:
 
 <pre>
 dependencies {
-    implementation 'com.github.KishanViramgama:Drawing:0.1.6'
+    implementation 'com.github.KishanViramgama:Drawing:0.1.7'
 }
 </pre>
 
