@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +18,19 @@ import com.app.kids.R;
 import com.app.kids.activity.MainActivity;
 import com.app.kids.activity.MyWorkShow;
 import com.app.kids.adapter.MyWorkAdapter;
+import com.app.kids.eventbus.Events;
+import com.app.kids.eventbus.GlobalBus;
 import com.app.kids.interfaces.OnClick;
 import com.app.kids.util.Constant;
 import com.app.kids.util.Method;
 import com.google.android.material.textview.MaterialTextView;
 
+import org.greenrobot.eventbus.Subscribe;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -35,6 +39,7 @@ public class MyWorkFragment extends Fragment {
 
     private Method method;
     private File file;
+    private List<File> fileList;
     private MaterialTextView textViewNoData;
     private RecyclerView recyclerView;
     private MyWorkAdapter myWorkAdapter;
@@ -44,19 +49,23 @@ public class MyWorkFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
 
+        GlobalBus.getBus().register(this);
+
         if (MainActivity.toolbar != null) {
             MainActivity.toolbar.setTitle(getResources().getString(R.string.my_work));
         }
 
-        Constant.fileList = new ArrayList<>();
+        fileList = new ArrayList<>();
 
         String root = getActivity().getExternalFilesDir(getResources().getString(R.string.saveDataPath)).toString();
         file = new File(root);
 
-        OnClick onClick = (OnClick) (position, type) ->
-                startActivity(new Intent(getActivity(), MyWorkShow.class)
-                        .putExtra("position", position));
-
+        OnClick onClick = (OnClick) (position, type) -> {
+            Constant.fileList.clear();
+            Constant.fileList.addAll(fileList);
+            startActivity(new Intent(getActivity(), MyWorkShow.class)
+                    .putExtra("position", position));
+        };
         method = new Method(getActivity(), onClick);
 
         new MyData().execute();
@@ -74,13 +83,26 @@ public class MyWorkFragment extends Fragment {
 
     }
 
+    @Subscribe
+    public void getData(Events.DeleteNotify deleteNotify) {
+        if (myWorkAdapter != null) {
+            fileList.remove(deleteNotify.getPosition());
+            myWorkAdapter.notifyDataSetChanged();
+        }
+        if (fileList.size() != 0) {
+            textViewNoData.setVisibility(View.GONE);
+        } else {
+            textViewNoData.setVisibility(View.VISIBLE);
+        }
+    }
+
     @SuppressLint("StaticFieldLeak")
     public class MyData extends AsyncTask<String, String, String> {
 
         @Override
         protected void onPreExecute() {
 
-            Constant.fileList.clear();
+            fileList.clear();
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setCancelable(false);
             progressDialog.show();
@@ -90,7 +112,9 @@ public class MyWorkFragment extends Fragment {
         @Override
         protected String doInBackground(String... strings) {
 
-            Constant.fileList = getListFiles(file);
+            fileList = getListFiles(file);
+            Collections.sort(fileList);
+            Collections.reverse(fileList);
 
             return null;
         }
@@ -98,8 +122,8 @@ public class MyWorkFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            if (Constant.fileList.size() != 0) {
-                myWorkAdapter = new MyWorkAdapter(getActivity(), Constant.fileList, method);
+            if (fileList.size() != 0) {
+                myWorkAdapter = new MyWorkAdapter(getActivity(), fileList, method);
                 recyclerView.setAdapter(myWorkAdapter);
             } else {
                 textViewNoData.setVisibility(View.VISIBLE);
@@ -132,9 +156,12 @@ public class MyWorkFragment extends Fragment {
 
     @Override
     public void onResume() {
-        if (myWorkAdapter != null) {
-            myWorkAdapter.notifyDataSetChanged();
-        }
         super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        GlobalBus.getBus().unregister(this);
+        super.onDestroy();
     }
 }

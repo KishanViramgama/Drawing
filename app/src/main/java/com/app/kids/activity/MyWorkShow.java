@@ -8,23 +8,26 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.app.kids.R;
 import com.app.kids.adapter.MyWorkShowAdapter;
+import com.app.kids.eventbus.Events;
+import com.app.kids.eventbus.GlobalBus;
 import com.app.kids.util.Constant;
 import com.app.kids.util.Method;
 import com.app.kids.util.ZoomOutTransformation;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 
 public class MyWorkShow extends AppCompatActivity {
 
     private Method method;
-    private int positionShare;
+    private int indexPosition;
     private ViewPager viewPager;
     private MyWorkShowAdapter myWorkShowAdapter;
 
@@ -37,12 +40,12 @@ public class MyWorkShow extends AppCompatActivity {
 
         Intent in = getIntent();
         int selectedPosition = in.getIntExtra("position", 0);
-        positionShare = selectedPosition;
+        indexPosition = selectedPosition;
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar_myWork_show);
         viewPager = findViewById(R.id.viewpager_myWork_show);
 
-        toolbar.setTitle("");
+        toolbar.setTitle(getResources().getString(R.string.my_work));
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -68,7 +71,7 @@ public class MyWorkShow extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
-            positionShare = position;
+            indexPosition = position;
         }
 
         @Override
@@ -96,19 +99,33 @@ public class MyWorkShow extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.ic_delete:
                 if (Constant.fileList.size() != 0) {
-                    File files = new File(Constant.fileList.get(viewPager.getCurrentItem()).toString());
-                    files.delete();
-                    Constant.fileList.remove(viewPager.getCurrentItem());
-                    myWorkShowAdapter.notifyDataSetChanged();
-                    if (Constant.fileList.size() == 0) {
-                        onBackPressed();
-                    }
-                    Toast.makeText(MyWorkShow.this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
+                    MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(MyWorkShow.this, R.style.DialogTitleTextStyle);
+                    alertDialogBuilder.setMessage(getResources().getString(R.string.delete_message));
+                    alertDialogBuilder.setPositiveButton(getResources().getString(R.string.yes),
+                            (arg0, arg1) -> {
+                                File files = new File(Constant.fileList.get(indexPosition).toString());
+                                files.delete();
+                                GlobalBus.getBus().post(new Events.DeleteNotify(indexPosition));
+                                Constant.fileList.remove(indexPosition);
+                                myWorkShowAdapter.notifyDataSetChanged();
+                                if (Constant.fileList.size() == 0) {
+                                    onBackPressed();
+                                }
+                                Toast.makeText(MyWorkShow.this, getResources().getString(R.string.delete), Toast.LENGTH_SHORT).show();
+                            });
+
+                    alertDialogBuilder.setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
+
+                    });
+
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+                    alertDialog.show();
+
                 }
                 break;
 
             case R.id.ic_share:
-                method.share(Constant.fileList.get(positionShare).toString());
+                method.share(Constant.fileList.get(indexPosition).toString());
                 Toast.makeText(this, getResources().getString(R.string.share), Toast.LENGTH_SHORT).show();
                 break;
 

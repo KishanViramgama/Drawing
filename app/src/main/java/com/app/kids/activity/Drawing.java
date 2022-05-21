@@ -28,10 +28,10 @@ import com.app.drawing.Util.CanvasView;
 import com.app.kids.R;
 import com.app.kids.adapter.ColorAdapter;
 import com.app.kids.database.DatabaseHandler;
+import com.app.kids.eventbus.Events;
+import com.app.kids.eventbus.GlobalBus;
 import com.app.kids.item.ColorList;
 import com.app.kids.util.Constant;
-import com.app.kids.util.Events;
-import com.app.kids.util.GlobalBus;
 import com.app.kids.util.Method;
 import com.google.android.material.appbar.MaterialToolbar;
 
@@ -39,7 +39,10 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -219,8 +222,19 @@ public class Drawing extends AppCompatActivity {
                 imageFile.mkdirs();
             }
 
+            //Using Date class
+            Date date = new Date();
+            //Pattern for showing milliseconds in the time "SSS"
+            @SuppressLint("SimpleDateFormat")
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+            String stringDate = sdf.format(date);
+
+            //Using Calendar class
+            Calendar cal = Calendar.getInstance();
+            String s = sdf.format(cal.getTime());
+
             Random generator = new Random();
-            filePath = imageFile.toString() + "/" + "Image-" + generator.nextInt(1000) + ".jpg";
+            filePath = imageFile + "/" + "Image-" + s + ".jpg";
 
             try {
 

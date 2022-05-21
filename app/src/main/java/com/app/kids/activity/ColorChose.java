@@ -1,7 +1,6 @@
 package com.app.kids.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.app.kids.R;
 import com.app.kids.database.DatabaseHandler;
 import com.app.kids.util.Constant;
-import com.app.kids.util.Events;
-import com.app.kids.util.GlobalBus;
+import com.app.kids.eventbus.Events;
+import com.app.kids.eventbus.GlobalBus;
 import com.app.kids.util.Method;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.button.MaterialButton;
@@ -24,7 +23,6 @@ public class ColorChose extends AppCompatActivity implements ColorObservable {
 
     private View view;
     private DatabaseHandler db;
-    private MaterialToolbar toolbar;
     private ColorPickerView colorPickerView;
 
     @Override
@@ -37,7 +35,7 @@ public class ColorChose extends AppCompatActivity implements ColorObservable {
 
         db = new DatabaseHandler(ColorChose.this);
 
-        toolbar = findViewById(R.id.toolbar_color_chose);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_color_chose);
         toolbar.setTitle(getResources().getString(R.string.chose_color));
         setSupportActionBar(toolbar);
 

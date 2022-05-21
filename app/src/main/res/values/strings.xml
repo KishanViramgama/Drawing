@@ -25,4 +25,8 @@
     <string name="noData">No data found</string>
     <string name="wrong">Something went to wrong please try again later</string>
 
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="delete_message">Are u sure you want to delete this item</string>
+
 </resources>

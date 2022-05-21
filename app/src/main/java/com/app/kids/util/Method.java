@@ -1,6 +1,7 @@
 package com.app.kids.util;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import androidx.core.content.FileProvider;
 
 import com.app.kids.R;
 import com.app.kids.interfaces.OnClick;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.io.File;
 
@@ -75,6 +77,8 @@ public class Method {
             shareIntent.setType("image/*");
             shareIntent.putExtra(Intent.EXTRA_TEXT, activity.getResources().getString(R.string.app_name));
             shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            shareIntent.setClipData(ClipData.newRawUri("", contentUri));
+            shareIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
             activity.startActivity(Intent.createChooser(shareIntent, activity.getResources().getString(R.string.share_to)));
         } catch (Exception e) {
             Log.d("error", e.toString());
@@ -91,7 +95,7 @@ public class Method {
         try {
             if (activity != null) {
                 if (!activity.isFinishing()) {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity, R.style.DialogTitleTextStyle);
+                    MaterialAlertDialogBuilder alertDialogBuilder = new MaterialAlertDialogBuilder(activity, R.style.DialogTitleTextStyle);
                     alertDialogBuilder.setMessage(message);
                     alertDialogBuilder.setPositiveButton(activity.getResources().getString(R.string.ok),
                             (arg0, arg1) -> {
