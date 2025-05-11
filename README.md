@@ -28,6 +28,12 @@ dependencies {
 
 
 
-# Donations
-<b>if you like this project and use this project please donation for covid-19</b> <a href="https://www.who.int/" target="_blank" rel="noopener noreferrer">https://www.who.int/</a>
-    
+## ☕ Support
+
+If you like this library and want to support my work, consider buying me a coffee.
+
+<p align="center">
+  <a href="https://paypal.me/KishanViramgama?country.x=IN&locale.x=en_GB" target="_blank">
+    <img src="https://img.shields.io/badge/☕-Buy%20Me%20a%20Coffee-orange?style=for-the-badge" />
+  </a>
+</p>
